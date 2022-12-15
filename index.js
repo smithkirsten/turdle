@@ -282,8 +282,9 @@ function viewStats() {
 
 function viewGameOverMessage(winBool) {
   if(winBool) {
+    let guesses = gamesPlayed[gamesPlayed.length - 1].guesses
     gameOverMessage.innerText = 'Yay!';
-    gameOverInfo.innerHTML = 'You did it! It took you <span id="game-over-guesses-count">/some number/</span> guess<span id="game-over-guesses-plural">es</span> to find the correct word.' //do I need to make this innerHTML
+    gameOverInfo.innerHTML = `You did it! It took you <span id="game-over-guesses-count">${guesses}</span> guess<span id="game-over-guesses-plural">es</span> to find the correct word.`;
   } else {
     gameOverMessage.innerText = 'Nice Try!';
     gameOverInfo.innerText = 'Play another round and see if you can get the next one...'
