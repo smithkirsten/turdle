@@ -114,7 +114,7 @@ function submitGuess() {
       changeRow();
     } else {
       //gameOver
-      declareWinner();
+      setTimeout(declareLoser(), 1000);
     }
   } else {
     errorMessage.innerText = 'Not a valid word. Try again!';
@@ -186,14 +186,21 @@ function changeRow() {
 }
 
 function declareWinner() {
-  recordGameStats();
+  recordGameStats(true);
   changeGameOverText();
   viewGameOverMessage();
   setTimeout(startNewGame, 4000);
 }
 
-function recordGameStats() {
-  gamesPlayed.push({ solved: true, guesses: currentRow });
+function declareLoser() {
+  recordGameStats(false)
+  //changeGameOverText
+  //viewGameOverMessage
+  setTimeout(startNewGame, 4000);
+}
+
+function recordGameStats(winBool) {
+  gamesPlayed.push({ solved: winBool, guesses: currentRow });
 }
 
 function changeGameOverText() {
