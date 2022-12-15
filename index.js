@@ -31,6 +31,8 @@ var letterKey = document.querySelector('#key-section');
 var rules = document.querySelector('#rules-section');
 var stats = document.querySelector('#stats-section');
 var gameOverBox = document.querySelector('#game-over-section');
+var gameOverMessage = document.querySelector('#game-over-message');
+var gameOverInfo = document.querySelector('#game-over-info');
 var gameOverGuessCount = document.querySelector('#game-over-guesses-count');
 var gameOverGuessGrammar = document.querySelector('#game-over-guesses-plural');
 
@@ -188,14 +190,14 @@ function changeRow() {
 function declareWinner() {
   recordGameStats(true);
   changeGameOverText();
-  viewGameOverMessage();
+  viewGameOverMessage(true);
   setTimeout(startNewGame, 4000);
 }
 
 function declareLoser() {
-  recordGameStats(false)
-  //changeGameOverText
-  //viewGameOverMessage
+  recordGameStats(false);
+  changeGameOverText();
+  viewGameOverMessage(false);
   setTimeout(startNewGame, 4000);
 }
 
@@ -266,7 +268,14 @@ function viewStats() {
   viewStatsButton.classList.add('active');
 }
 
-function viewGameOverMessage() {
+function viewGameOverMessage(winBool) {
+  if(winBool) {
+    gameOverMessage.innerText = 'Yay!';
+    gameOverInfo.innerHTML = 'You did it! It took you <span id="game-over-guesses-count">/some number/</span> guess<span id="game-over-guesses-plural">es</span> to find the correct word.' //do I need to make this innerHTML
+  } else {
+    gameOverMessage.innerText = 'Nice Try!';
+    gameOverInfo.innerText = 'Play another round and see if you can get the next one...'
+  }
   gameOverBox.classList.remove('collapsed')
   letterKey.classList.add('hidden');
   gameBoard.classList.add('collapsed');
