@@ -110,8 +110,11 @@ function submitGuess() {
     compareGuess();
     if (checkForWin()) {
       setTimeout(declareWinner, 1000);
-    } else {
+    } else if (currentRow < 6){
       changeRow();
+    } else {
+      //gameOver
+      declareWinner();
     }
   } else {
     errorMessage.innerText = 'Not a valid word. Try again!';
