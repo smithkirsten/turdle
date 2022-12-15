@@ -30,6 +30,9 @@ var gameBoard = document.querySelector('#game-section');
 var letterKey = document.querySelector('#key-section');
 var rules = document.querySelector('#rules-section');
 var stats = document.querySelector('#stats-section');
+var totalGamesPlayed = document.querySelector('#stats-total-games');
+var percentCorrect = document.querySelector('#stats-percent-correct');
+var averageGuesses = document.querySelector('#stats-average-guesses');
 var gameOverBox = document.querySelector('#game-over-section');
 var gameOverMessage = document.querySelector('#game-over-message');
 var gameOverInfo = document.querySelector('#game-over-info');
@@ -259,6 +262,15 @@ function viewGame() {
 }
 
 function viewStats() {
+  //calculate stats
+  const percentage = (gamesPlayed.filter(game => game.solved).length / gamesPlayed.length) * 100;
+  const guesses = gamesPlayed.reduce((totalGuesses, game) => totalGuesses += game.guesses, 0) / gamesPlayed.length;
+
+  //insert stats into innerText
+  totalGamesPlayed.innerText = `${gamesPlayed.length}`;
+  percentCorrect.innerText = `${percentage}`;
+  averageGuesses.innerText = `${guesses}`;
+
   letterKey.classList.add('hidden');
   gameBoard.classList.add('collapsed');
   rules.classList.add('collapsed');
